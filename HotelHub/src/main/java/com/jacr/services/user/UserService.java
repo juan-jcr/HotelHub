@@ -13,6 +13,7 @@ import java.util.List;
 
 @Service
 public class UserService implements IUserService{
+
     @Autowired
     private UserRepository userRepository;
 
@@ -56,6 +57,15 @@ public class UserService implements IUserService{
 
         response.setMessage("successful");
         response.setUser(userDTO);
+        return response;
+    }
+
+    @Override
+    public Response deleteUser(Long id) {
+        Response response = new Response();
+        userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not foud"));
+        userRepository.deleteById(id);
+        response.setMessage("successful");
         return response;
     }
 }
