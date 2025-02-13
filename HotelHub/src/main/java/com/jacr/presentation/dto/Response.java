@@ -2,6 +2,8 @@ package com.jacr.presentation.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.util.List;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Response {
     private String message;
@@ -11,15 +13,17 @@ public class Response {
     private String expirationTime;
 
     private UserDTO user;
+    private List<UserDTO> userList;
 
     public Response(){}
 
-    public Response(String message, String token, String role, String expirationTime, UserDTO user) {
+    public Response(String message, String token, String role, String expirationTime, UserDTO user, List<UserDTO> userList) {
         this.message = message;
         this.token = token;
         this.role = role;
         this.expirationTime = expirationTime;
         this.user = user;
+        this.userList = userList;
     }
 
     public String getMessage() {
@@ -60,5 +64,13 @@ public class Response {
 
     public void setUser(UserDTO user) {
         this.user = user;
+    }
+
+    public List<UserDTO> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<UserDTO> userList) {
+        this.userList = userList;
     }
 }
