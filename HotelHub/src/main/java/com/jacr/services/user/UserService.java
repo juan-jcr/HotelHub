@@ -45,4 +45,17 @@ public class UserService implements IUserService{
 
 
     }
+
+    @Override
+    public Response getMyInfo(String email) {
+        Response response = new Response();
+
+        UserEntity user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not foud"));
+        UserDTO userDTO = Utils.mapUserEntityToUserDTO(user);
+
+        response.setMessage("successful");
+        response.setUser(userDTO);
+        return response;
+    }
 }
