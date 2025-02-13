@@ -1,6 +1,7 @@
 package com.jacr.presentation.controller;
 
 import com.jacr.persistence.entities.UserEntity;
+import com.jacr.presentation.dto.LoginRequest;
 import com.jacr.presentation.dto.Response;
 import com.jacr.services.auth.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,10 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<Response> register(@RequestBody UserEntity user){
         return new ResponseEntity<>(authService.registerUser(user), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Response> login(@RequestBody LoginRequest loginRequest){
+        return new ResponseEntity<>(authService.login(loginRequest), HttpStatus.OK);
     }
 }
