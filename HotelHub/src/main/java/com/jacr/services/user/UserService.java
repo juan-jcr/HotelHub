@@ -1,5 +1,6 @@
 package com.jacr.services.user;
 
+import com.jacr.exception.ResourceNotFoundException;
 import com.jacr.persistence.entities.UserEntity;
 import com.jacr.persistence.repositories.UserRepository;
 import com.jacr.presentation.dto.Response;
@@ -28,5 +29,20 @@ public class UserService implements IUserService{
         response.setMessage("successful");
 
        return response;
+    }
+
+    @Override
+    public Response getUserById(Long id) {
+        Response response = new Response();
+
+        UserEntity user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not foud"));
+
+        UserDTO userDTO = Utils.mapUserEntityToUserDTO(user);
+        response.setMessage("successful");
+        response.setUser(userDTO);
+        return response;
+
+
     }
 }
