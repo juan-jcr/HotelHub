@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -30,6 +31,9 @@ public class UserEntity implements UserDetails {
     private String phoneNumber;
 
     private String role;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Booking> bookings = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -65,13 +69,14 @@ public class UserEntity implements UserDetails {
 
     public UserEntity(){}
 
-    public UserEntity(Long id, String name, String email, String password, String phoneNumber, String role) {
+    public UserEntity(Long id, String name, String email, String password, String phoneNumber, String role, List<Booking> bookings) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.role = role;
+        this.bookings = bookings;
     }
 
     public Long getId() {
@@ -120,6 +125,14 @@ public class UserEntity implements UserDetails {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 
     @Override
