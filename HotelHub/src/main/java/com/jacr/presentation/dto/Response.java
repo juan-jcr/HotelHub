@@ -13,17 +13,25 @@ public class Response {
     private String expirationTime;
 
     private UserDTO user;
+    private RoomDTO room;
+    private BookingDTO booking;
     private List<UserDTO> userList;
+    private List<RoomDTO> roomList;
+    private List<BookingDTO> bookingList;
 
     public Response(){}
 
-    public Response(String message, String token, String role, String expirationTime, UserDTO user, List<UserDTO> userList) {
+    public Response(String message, String token, String role, String expirationTime, UserDTO user, RoomDTO room, BookingDTO booking, List<UserDTO> userList, List<RoomDTO> roomList, List<BookingDTO> bookingList) {
         this.message = message;
         this.token = token;
         this.role = role;
         this.expirationTime = expirationTime;
         this.user = user;
+        this.room = room;
+        this.booking = booking;
         this.userList = userList;
+        this.roomList = roomList;
+        this.bookingList = bookingList;
     }
 
     public String getMessage() {
@@ -72,5 +80,37 @@ public class Response {
 
     public void setUserList(List<UserDTO> userList) {
         this.userList = userList;
+    }
+
+    public RoomDTO getRoom() {
+        return room;
+    }
+
+    public void setRoom(RoomDTO room) {
+        this.room = room;
+    }
+
+    public BookingDTO getBooking() {
+        return booking;
+    }
+
+    public void setBooking(BookingDTO booking) {
+        this.booking = booking;
+    }
+
+    public List<RoomDTO> getRoomList() {
+        return roomList;
+    }
+
+    public void setRoomList(List<RoomDTO> roomList) {
+        this.roomList = roomList;
+    }
+
+    public List<BookingDTO> getBookingList() {
+        return bookingList;
+    }
+
+    public void setBookingList(List<BookingDTO> bookingList) {
+        this.bookingList = bookingList;
     }
 }
