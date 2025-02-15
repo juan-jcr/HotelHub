@@ -11,6 +11,7 @@ public class Response {
     private String token;
     private String role;
     private String expirationTime;
+    private String bookingConfirmationCode;
 
     private UserDTO user;
     private RoomDTO room;
@@ -21,11 +22,12 @@ public class Response {
 
     public Response(){}
 
-    public Response(String message, String token, String role, String expirationTime, UserDTO user, RoomDTO room, BookingDTO booking, List<UserDTO> userList, List<RoomDTO> roomList, List<BookingDTO> bookingList) {
+    public Response(String message, String token, String role, String expirationTime, String bookingConfirmationCode, UserDTO user, RoomDTO room, BookingDTO booking, List<UserDTO> userList, List<RoomDTO> roomList, List<BookingDTO> bookingList) {
         this.message = message;
         this.token = token;
         this.role = role;
         this.expirationTime = expirationTime;
+        this.bookingConfirmationCode = bookingConfirmationCode;
         this.user = user;
         this.room = room;
         this.booking = booking;
@@ -64,6 +66,14 @@ public class Response {
 
     public void setExpirationTime(String expirationTime) {
         this.expirationTime = expirationTime;
+    }
+
+    public String getBookingConfirmationCode() {
+        return bookingConfirmationCode;
+    }
+
+    public void setBookingConfirmationCode(String bookingConfirmationCode) {
+        this.bookingConfirmationCode = bookingConfirmationCode;
     }
 
     public UserDTO getUser() {
