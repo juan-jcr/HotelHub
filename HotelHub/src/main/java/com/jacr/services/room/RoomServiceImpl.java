@@ -1,6 +1,7 @@
 package com.jacr.services.room;
 
 
+import com.jacr.exception.ResourceNotFoundException;
 import com.jacr.persistence.entities.Room;
 import com.jacr.persistence.repositories.RoomRepository;
 import com.jacr.presentation.dto.Response;
@@ -57,6 +58,35 @@ public class RoomServiceImpl implements RoomService {
         response.setMessage("successful");
         response.setRoomList(roomDTOList);
 
+        return response;
+    }
+
+    @Override
+    public Response updateRoom(Long id, String description, String roomType, BigDecimal roomPrice, MultipartFile photo) {
+        Response response = new Response();
+
+        try{
+            String imageUrl = null;
+            if (photo != null && !photo.isEmpty()){
+                imageUrl = uploadService.saveUpload(photo);
+            }
+            Room room = roomRepository
+                    .findById(id).orElseThrow(() -> new ResourceNotFoundException("Room not found"));
+
+            room.setRoomType(roomType);
+            room.setRoomPrice(roomPrice);
+            room.setRoomDescription(description);
+            room.setRoomPhotoUrl(imageUrl);
+
+            Room updatedRoom = roomRepository.save(room);
+            RoomDTO roomDTO = Utils.mapRoomEntityToRoomDTO(updatedRoom);
+
+            response.setMessage("successful");
+            response.setRoom(roomDTO);
+
+        } catch (Exception e) {
+            response.setMessage(e.getMessage());
+        }
         return response;
     }
 }

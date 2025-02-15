@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 @RestController
 @RequestMapping("/api/v1/rooms")
 public class RoomController {
+
     @Autowired
     private RoomService roomService;
 
@@ -37,6 +38,19 @@ public class RoomController {
     @GetMapping("/all")
     public ResponseEntity<Response> getAllRooms() {
         return new ResponseEntity<>(roomService.getAllRooms(), HttpStatus.OK);
+
+    }
+    @PutMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<Response> updateRoom(
+            @PathVariable Long id,
+            @RequestParam(value = "photo", required = false) MultipartFile photo,
+            @RequestParam(value = "roomType", required = false) String roomType,
+            @RequestParam(value = "roomPrice", required = false) BigDecimal roomPrice,
+            @RequestParam(value = "roomDescription", required = false) String roomDescription) {
+
+        Response response = roomService.updateRoom(id, roomDescription, roomType, roomPrice, photo);
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
