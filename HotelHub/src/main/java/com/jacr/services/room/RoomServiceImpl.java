@@ -7,10 +7,12 @@ import com.jacr.presentation.dto.Response;
 import com.jacr.presentation.dto.RoomDTO;
 import com.jacr.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class RoomServiceImpl implements RoomService {
@@ -42,6 +44,19 @@ public class RoomServiceImpl implements RoomService {
         } catch (Exception e) {
             response.setMessage("Error saving a room " + e.getMessage());
         }
+        return response;
+    }
+
+    @Override
+    public Response getAllRooms() {
+        Response response = new Response();
+
+        List<Room> roomList = roomRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        List<RoomDTO> roomDTOList = Utils.mapRoomListEntityToRoomListDTO(roomList);
+
+        response.setMessage("successful");
+        response.setRoomList(roomDTOList);
+
         return response;
     }
 }

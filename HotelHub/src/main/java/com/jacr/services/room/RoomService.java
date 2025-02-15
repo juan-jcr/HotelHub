@@ -7,5 +7,6 @@ import java.math.BigDecimal;
 
 public interface RoomService {
     Response addNewRoom(MultipartFile photo, String roomType, BigDecimal roomPrice, String description);
+    Response getAllRooms();
 
 }
