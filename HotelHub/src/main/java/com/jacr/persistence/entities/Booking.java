@@ -1,6 +1,9 @@
 package com.jacr.persistence.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
@@ -11,16 +14,20 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "check in date is required")
     @Column(name = "check_in_date")
     private LocalDate checkInDate;
 
     @Column(name = "check_out_date")
+    @Future(message = "check out date must be in the future")
     private LocalDate checkOutDate;
 
     @Column(name = "num_of_adults")
+    @Min(value = 1, message = "Number of adults must not be less that 1")
     private int numOfAdults;
 
     @Column(name = "num_of_children")
+    @Min(value = 0, message = "Number of children must not be less that 0")
     private int numOfChildren;
 
     @Column(name = "total_num_of_guest")

@@ -40,5 +40,9 @@ public class UserController {
     public ResponseEntity<Response> deleteById(@PathVariable Long id){
         return new ResponseEntity<>(userService.deleteUser(id), HttpStatus.OK);
     }
+    @GetMapping("/get-user-bookings/{id}")
+    public ResponseEntity<Response> getUserBookingHistory(@PathVariable Long id) {
+       return new ResponseEntity<>(userService.getUserBookingHistory(id), HttpStatus.OK);
+    }
 
 }

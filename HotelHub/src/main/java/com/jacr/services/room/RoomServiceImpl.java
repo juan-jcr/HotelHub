@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -129,6 +130,16 @@ public class RoomServiceImpl implements RoomService {
         response.setMessage("successful");
         response.setRoomList(roomDTOList);
 
+        return response;
+    }
+
+    @Override
+    public Response getAvailableRoomsByDataAndType(LocalDate checkInDate, LocalDate checkOutDate, String roomType) {
+        Response response = new Response();
+        List<Room> availableRooms = roomRepository.findAvailableRoomsByDatesAndTypes(checkInDate, checkOutDate, roomType);
+        List<RoomDTO> roomDTOList = Utils.mapRoomListEntityToRoomListDTO(availableRooms);
+        response.setMessage("successful");
+        response.setRoomList(roomDTOList);
         return response;
     }
 }

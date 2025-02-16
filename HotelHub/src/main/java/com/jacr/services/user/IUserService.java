@@ -7,5 +7,6 @@ public interface IUserService {
     Response getUserById(Long id);
     Response getMyInfo(String email);
     Response deleteUser(Long id);
+    Response getUserBookingHistory(Long id);
 
 }

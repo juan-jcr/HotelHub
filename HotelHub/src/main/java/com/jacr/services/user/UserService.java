@@ -68,4 +68,17 @@ public class UserService implements IUserService{
         response.setMessage("successful");
         return response;
     }
+
+    @Override
+    public Response getUserBookingHistory(Long id) {
+        Response response = new Response();
+
+        UserEntity user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User Not Found"));
+
+        UserDTO userDTO = Utils.mapUserEntityToUserDTOPlusUserBookingsAndRoom(user);
+        response.setMessage("successful");
+        response.setUser(userDTO);
+        return response;
+    }
 }

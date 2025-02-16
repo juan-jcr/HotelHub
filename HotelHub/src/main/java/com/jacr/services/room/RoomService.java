@@ -4,6 +4,7 @@ import com.jacr.presentation.dto.Response;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface RoomService {
@@ -14,5 +15,6 @@ public interface RoomService {
     Response deleteRoom(Long id);
     Response getRoomById(Long id);
     Response getAllAvailableRooms();
+    Response getAvailableRoomsByDataAndType(LocalDate checkInDate, LocalDate checkOutDate, String roomType);
 
 }
