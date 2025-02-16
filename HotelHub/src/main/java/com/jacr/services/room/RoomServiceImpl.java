@@ -119,4 +119,16 @@ public class RoomServiceImpl implements RoomService {
 
         return response;
     }
+
+    @Override
+    public Response getAllAvailableRooms() {
+        Response response = new Response();
+        List<Room> roomList = roomRepository.getAllAvailableRooms();
+        List<RoomDTO> roomDTOList = Utils.mapRoomListEntityToRoomListDTO(roomList);
+
+        response.setMessage("successful");
+        response.setRoomList(roomDTOList);
+
+        return response;
+    }
 }

@@ -72,4 +72,9 @@ public class RoomController {
        return new ResponseEntity<>(roomService.getRoomById(id), HttpStatus.OK);
     }
 
+    @GetMapping("/all-available-rooms")
+    public ResponseEntity<Response> getAvailableRooms() {
+        return new ResponseEntity<>(roomService.getAllAvailableRooms(), HttpStatus.OK);
+    }
+
 }
