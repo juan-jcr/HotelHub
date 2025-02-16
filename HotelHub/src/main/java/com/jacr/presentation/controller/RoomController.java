@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/rooms")
@@ -40,6 +41,12 @@ public class RoomController {
         return new ResponseEntity<>(roomService.getAllRooms(), HttpStatus.OK);
 
     }
+
+    @GetMapping("/types")
+    public List<String> getRoomTypes() {
+        return roomService.getAllRoomTypes();
+    }
+
     @PutMapping("/update/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Response> updateRoom(

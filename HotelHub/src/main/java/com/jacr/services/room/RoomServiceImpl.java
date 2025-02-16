@@ -62,6 +62,11 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    public List<String> getAllRoomTypes() {
+        return roomRepository.findDistinctRoomTypes();
+    }
+
+    @Override
     public Response updateRoom(Long id, String description, String roomType, BigDecimal roomPrice, MultipartFile photo) {
         Response response = new Response();
 
