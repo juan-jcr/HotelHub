@@ -12,5 +12,6 @@ public interface RoomService {
     List<String> getAllRoomTypes();
     Response updateRoom(Long id, String description, String roomType, BigDecimal roomPrice, MultipartFile photo);
     Response deleteRoom(Long id);
+    Response getRoomById(Long id);
 
 }

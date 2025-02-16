@@ -67,4 +67,9 @@ public class RoomController {
         return new ResponseEntity<>(roomService.deleteRoom(id), HttpStatus.OK);
     }
 
+    @GetMapping("/room-by-id/{id}")
+    public ResponseEntity<Response> getRoomById(@PathVariable Long id) {
+       return new ResponseEntity<>(roomService.getRoomById(id), HttpStatus.OK);
+    }
+
 }

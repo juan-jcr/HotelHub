@@ -105,4 +105,18 @@ public class RoomServiceImpl implements RoomService {
 
         return response;
     }
+
+    @Override
+    public Response getRoomById(Long id) {
+        Response response = new Response();
+
+        Room room = roomRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Room Not Found"));
+
+        RoomDTO roomDTO = Utils.mapRoomEntityToRoomDTOPlusBookings(room);
+        response.setMessage("successful");
+        response.setRoom(roomDTO);
+
+        return response;
+    }
 }
