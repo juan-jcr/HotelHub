@@ -89,4 +89,15 @@ public class RoomServiceImpl implements RoomService {
         }
         return response;
     }
+
+    @Override
+    public Response deleteRoom(Long id) {
+        Response response = new Response();
+
+        roomRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Room Not Found"));
+        roomRepository.deleteById(id);
+        response.setMessage("successful");
+
+        return response;
+    }
 }

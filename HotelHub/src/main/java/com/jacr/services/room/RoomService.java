@@ -9,5 +9,6 @@ public interface RoomService {
     Response addNewRoom(MultipartFile photo, String roomType, BigDecimal roomPrice, String description);
     Response getAllRooms();
     Response updateRoom(Long id, String description, String roomType, BigDecimal roomPrice, MultipartFile photo);
+    Response deleteRoom(Long id);
 
 }
